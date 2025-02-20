@@ -1,7 +1,7 @@
 import pytest
 from flask import Flask
 from uuid import UUID
-from pg import app  # Replace `your_app_module` with the name of your Python file
+from pg import app 
 
 @pytest.fixture
 def client():
