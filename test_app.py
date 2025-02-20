@@ -29,3 +29,14 @@ def test_create_new_user(client):
         UUID(data['user_id'], version=4)
     except ValueError:
         pytest.fail("user_id is not a valid UUID")
+
+def test_unique_user_ids(client):
+    """Test that each request generates a unique user_id."""
+    response1 = client.get('/new-user')
+    response2 = client.get('/new-user')
+    assert response1.get_json()['user_id'] != response2.get_json()['user_id']
+
+def test_response_content_type(client):
+    """Test that the response content type is application/json."""
+    response = client.get('/new-user')
+    assert response.content_type == 'application/json'
